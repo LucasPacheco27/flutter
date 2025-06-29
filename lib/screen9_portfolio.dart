@@ -194,7 +194,7 @@ class _MainPageState extends State<PortfolioPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Your total asset portfolio",
+                          "Amount Invested",
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontWeight: FontWeight.w500,

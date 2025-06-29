@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen14_news.dart';
 import 'package:flutter_application_1/screen9_portfolio.dart';
+import 'package:flutter_application_1/screen12_aapl.dart';
+import 'package:flutter_application_1/screen13_THY.dart';
 
 class homepage2 extends StatelessWidget {
   const homepage2({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class homepage2 extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
               child: Text(
-                'Home',
+                'Snapshots',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
@@ -52,7 +54,7 @@ class homepage2 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Your total asset portfolio",
+                      "Amounted Invested",
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.93),
                         fontSize: 15,
@@ -97,7 +99,7 @@ class homepage2 extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "What´s to buy",
+                    "Hot Stocks",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
@@ -134,28 +136,44 @@ class homepage2 extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _BuyCard(
+                  GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AAPLDetailScreen()),
+                    );
+                    },
+                  child: _BuyCard(
                     color: Colors.black,
                     icon: Icons.apple,
                     iconColor: Colors.white,
                     text: "AAPL",
                     textColor: Colors.white,
                   ),
+                  ),
                   SizedBox(width: 14),
 
-                  _BuyCard(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => THYDetailScreen()),
+                      );
+                    },
+                  child: _BuyCard(
                     color: Color(0xFFD00424),
                     icon: Icons.flight,
                     iconColor: Colors.white,
-                    text: "THY",
+                    text: "THYA",
                     textColor: Colors.white,
+                  ),
                   ),
                   SizedBox(width: 14),
 
                   _BuyCard(
                     color: fbBlue,
                     fb: true,
-                    text: "FB",
+                    text: "META",
                     textColor: Colors.white,
                   ),
                 ],

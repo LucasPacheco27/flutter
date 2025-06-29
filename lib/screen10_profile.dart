@@ -56,7 +56,7 @@ class ProfilePage extends StatelessWidget {
 
                 Row(
                   children: [
-                    CircleAvatar(radius: 32, backgroundImage: NetworkImage("")),
+                    CircleAvatar(radius: 32, backgroundImage: AssetImage('assets/images/sarah.JPG')),
                     SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

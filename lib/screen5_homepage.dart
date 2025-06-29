@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen10_profile.dart';
 import 'package:flutter_application_1/screen11_homepage2.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  // <--- Burada Stateless yerine StatefulWidget kullandık!
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 2;
+  final int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     switch (index) {
@@ -21,6 +21,14 @@ class _HomePageState extends State<HomePage> {
           MaterialPageRoute(builder: (context) => ProfilePage()),
         );
         break;
+    }
+  }
+
+  // Função para abrir URL
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
     }
   }
 
@@ -105,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 right: 18.0,
               ),
               child: Text(
-                "Hi, Sarah",
+                "Hi, Sarah!",
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28),
               ),
             ),
@@ -122,7 +130,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   Text(
-                    "Trending Stocks",
+                    "Trending Features",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
@@ -145,40 +153,154 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 1),
-              child: Column(
-                children: [
-                  _TrendingStockTile(
-                    icon: Icons.account_balance,
-                    iconColor: goldColor,
-                    title: "GOLD",
-                    subtitle: "The most purchased in the last week",
-                    price: "260,50 €",
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 30.0,
+                    right: 30.0,
+                    top: 10,
                   ),
-                  SizedBox(height: 6),
-                  _TrendingStockTile(
-                    image: Image.asset(
-                      'assets/images/amazon.png',
-                      width: 30,
-                      height: 30,
-                    ),
-                    title: "AMZN",
-                    subtitle: "The most added to the watchlist",
-                    price: "173,50 €",
+                  child: Column(
+                    children: [
+                      _TrendingStockTile(
+                        icon: Icons.account_balance,
+                        iconColor: goldColor,
+                        title: "GOLD",
+                        subtitle: "The most purchased in the last week",
+                        price: "260,50 €",
+                      ),
+                      SizedBox(height: 16),
+                      _TrendingStockTile(
+                        image: Image.asset(
+                          'assets/images/amazon.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                        title: "AMZN",
+                        subtitle: "The most added to the watchlist",
+                        price: "173,50 €",
+                      ),
+                      SizedBox(height: 16),
+                      _TrendingStockTile(
+                        icon: Icons.currency_bitcoin,
+                        iconColor: Colors.black,
+                        title: "BTC",
+                        subtitle: "Recommended from analysts",
+                        price: "75.000 €",
+                      ),
+
+                      // WebSite Container
+                      SizedBox(height: 22),
+                      GestureDetector(
+                        onTap:
+                            () => _launchURL(
+                              'https://stock-trackvest.netlify.app/',
+                            ),
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/images/webSite_Invest2.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.black.withOpacity(0.6),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 16,
+                                  left: 16,
+                                  right: 16,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Explore our Website",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black54,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "Discover new features and opportunities!",
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.9),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black54,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 12,
+                                  right: 12,
+                                  child: Container(
+                                    padding: EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Icon(
+                                      Icons.open_in_new,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 20),
+                    ],
                   ),
-                  SizedBox(height: 6),
-                  _TrendingStockTile(
-                    icon: Icons.currency_bitcoin,
-                    iconColor: Colors.black,
-                    title: "BTC",
-                    subtitle: "Recommended from analysts",
-                    price: "75.000 €",
-                  ),
-                ],
+                ),
               ),
             ),
-            const Spacer(),
 
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -202,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   child: Text(
-                    "Get Started >",
+                    "Get Started",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,

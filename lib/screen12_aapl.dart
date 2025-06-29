@@ -65,9 +65,9 @@ class _AAPLDetailScreenState extends State<AAPLDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Color(0xFF4656DD),
         toolbarHeight: 32,
-        leading: BackButton(color: Colors.white),
+        leading: BackButton(color: Colors.black),
         actions: [
           IconButton(icon: Icon(Icons.notifications_none), onPressed: () {}),
           IconButton(icon: Icon(Icons.bookmark_border), onPressed: () {}),
